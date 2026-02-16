@@ -1,5 +1,6 @@
 package com.example.viciousai
 
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.widget.Toast
@@ -30,16 +31,6 @@ class MainActivity : AppCompatActivity() {
             .setOnClickListener {
                 startAnalysis()
             }
-    }
-
-    private fun checkPermissions() {
-        val missing = PERMISSIONS.filter {
-            checkSelfPermission(it) != PackageManager.PERMISSION_GRANTED
-        }
-
-        if (missing.isNotEmpty()) {
-            requestPermissions(missing.toTypedArray(), REQUEST_CODE)
-        }
     }
 
     override fun onRequestPermissionsResult(
@@ -75,7 +66,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun launchAnalysis() {
-        Toast.makeText(this, "Analyse démarrée", Toast.LENGTH_SHORT).show()
-        // Ici nous pourrons lancer la capture de l'audio
+        val intent = Intent(this, DecisionActivity::class.java)
+        startActivity(intent)
     }
 }
