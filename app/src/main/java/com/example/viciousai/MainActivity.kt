@@ -2,10 +2,12 @@ package com.example.viciousai
 
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Bundle
 import android.widget.ImageButton
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -34,7 +36,7 @@ class MainActivity : AppCompatActivity() {
             }
 
         findViewById<ImageButton>(R.id.helpButton).setOnClickListener {
-            Toast.makeText(this, "Page d'aide à venir", Toast.LENGTH_SHORT).show()
+            showHelpDialog()
         }
     }
 
@@ -74,4 +76,40 @@ class MainActivity : AppCompatActivity() {
         val intent = Intent(this, DecisionActivity::class.java)
         startActivity(intent)
     }
+
+    private fun showHelpDialog() {
+
+        val message = """
+Comment fonctionne Vicious AI ?
+
+Nous analysons l'appel grâce à une intelligence artificielle que nous faisons fonctionner sur nos serveurs afin de garantir le respect de vos données personnelles.
+
+L'analyse fournit un pourcentage de confiance entre 0% et 100% permettant d'évaluer la situation.
+
+IMPORTANT — Permissions :
+
+Si vous refusez les permissions lors du premier lancement, Android enregistre ce choix et l'application ne pourra plus les redemander automatiquement.
+
+Pour les réactiver :
+
+1) Ouvrez les paramètres de votre téléphone
+2) Allez dans Applications → Vicious AI
+3) Ouvrez l'onglet "Autorisations"
+4) Activez Microphone et Téléphone
+
+Sans ces permissions, l'analyse ne pourra pas fonctionner.
+""".trimIndent()
+
+        AlertDialog.Builder(this)
+            .setTitle("Aide")
+            .setMessage(message)
+            .setPositiveButton("Ouvrir les paramètres") { _, _ ->
+                val intent = Intent(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
+                intent.data = Uri.parse("package:$packageName")
+                startActivity(intent)
+            }
+            .setNegativeButton("Compris", null)
+            .show()
+    }
+
 }
