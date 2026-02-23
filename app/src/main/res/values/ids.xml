@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="registerTitle" type="id"/>
+    <item name="confirmLayout" type="id"/>
+    <item name="consentCheck" type="id"/>
+    <item name="registerButton" type="id"/>
+    <item name="backLogin" type="id"/>
+</resources>

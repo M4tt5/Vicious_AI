@@ -25,6 +25,7 @@
         </activity>
 
         <activity android:name=".DecisionActivity" />
+        <activity android:name=".RegisterActivity"/>
     </application>
 
 </manifest>

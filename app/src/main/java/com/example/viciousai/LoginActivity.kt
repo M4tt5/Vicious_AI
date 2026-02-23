@@ -18,5 +18,12 @@ class LoginActivity : AppCompatActivity() {
             startActivity(Intent(this, MainActivity::class.java))
             finish()
         }
+
+        val inscriptionButton = findViewById<Button>(R.id.registerButton)
+
+        inscriptionButton.setOnClickListener {
+            startActivity(Intent(this, RegisterActivity::class.java))
+            finish()
+        }
     }
 }
