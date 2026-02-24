@@ -34,3 +34,6 @@ obj/
 # === Kotlin ===
 .kotlin/
 
+# === Serveur ===
+
+.Serveur/.env
