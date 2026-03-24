@@ -37,4 +37,7 @@ obj/
 # === Serveur ===
 viciousai-firebase-adminsdk-fbsvc-cedd949dee.json
 Serveur/.env
+
+# === keyFirebase ===
 app/google-service.json
+google-services.json
