@@ -1,12 +1,45 @@
 from fastapi import FastAPI, Header, HTTPException
 import requests
 import speech_to_text.whisper_transcribe as whisper_model
+import json
 
 app = FastAPI()
 
 API_KEY = "VISHIELD-SECRET-KEY"
 
 OLLAMA_URL = "http://localhost:11434/api/generate"
+
+def detect_vishing(transcription: str) -> dict:
+    """Analyse la transcription avec Qwen via Ollama pour détecter une fraude."""
+    
+    # Le prompt système définit le rôle de l'IA
+    system_prompt = (
+        "Tu es un expert en cybersécurité spécialisé dans la détection du vishing (phishing vocal). "
+        "Analyse la transcription suivante et détermine si elle semble frauduleuse. "
+        "Réponds UNIQUEMENT au format JSON avec les clés suivantes : "
+        "'risk_score' (0 à 100), 'is_vishing' (boolean), 'reasoning' (bref résumé en français), "
+        "'urgency_detected' (boolean)."
+    )
+
+    try:
+        response = requests.post(
+            OLLAMA_URL,
+            json={
+                "model": "qwen2.5:7b", # Ou "qwen" selon votre installation
+                "prompt": f"{system_prompt}\n\nTranscription : {transcription}",
+                "stream": False,
+                "format": "json" # Force Ollama à répondre en JSON
+            },
+            timeout=30 # Sécurité si Ollama met du temps
+        )
+        response.raise_for_status()
+        
+        # On parse la string JSON retournée par Ollama
+        return json.loads(response.json().get("response", "{}"))
+    
+    except Exception as e:
+        print(f"Erreur Ollama : {e}")
+        return {"error": "L'analyse n'a pas pu être effectuée"}
 
 def transcribe_audio(audio_path: str) -> str:
     """Run Whisper and return the transcription."""
@@ -41,8 +74,8 @@ async def analyze_audio(
         print(f"Transcription: {transcription[:120]}...")
 
         # Step 2: Vishing detection
-        print("Running vishing analysis...")
-        # ----------------------------- analysis = detect_vishing(transcription)
+        print("Running vishing analysis with Qwen...")
+        analysis = detect_vishing(transcription)
 
         # Step 3: Build full result payload
         timestamp = datetime.utcnow().strftime("%Y%m%dT%H%M%SZ")
