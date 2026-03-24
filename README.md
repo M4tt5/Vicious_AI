@@ -38,3 +38,12 @@ Le projet repose sur les technologies suivantes :
 ## Installation et exécution
 
 Pour lancer le projet, il suffit de cloner le dépôt GitHub, d’ouvrir le projet dans Android Studio, puis de synchroniser les dépendances Gradle. L’application peut ensuite être exécutée sur un appareil physique Android.
+
+
+
+
+## Aide 
+Lancer le serveur: 
+python -m uvicorn Serveur.server:app --host 0.0.0.0 --port 8000
+
+Pas oublier de prendre speech to text et mettre le pyhton to pass aussi 
