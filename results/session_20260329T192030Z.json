@@ -1,0 +1,43 @@
+{
+    "timestamp": "2026-03-29T19:20:30.281884",
+    "full_transcription": " Hello. You have been contacted from Amazon this call as it regard to-  Authorize a payment of $299. We would like you to...  Form that there has been an order place for an apple iPhone 11 Pro using your account.  If you do not authorize, then press want to speak or represent.  or press 2 to authorize. Thank you.",
+    "global_risk_score": 85,
+    "last_analysis": {
+        "risk_score": 85,
+        "is_vishing": true,
+        "reasoning": "La conversation présente des caractéristiques de vishing courantes, notamment l'authentification par un numéro inconnu prétendant être Amazon, la mention d'une commande non sollicitée (iPhone 11 Pro), et le demande de confirmation par une action téléphonique (press 2 to authorize).",
+        "urgency_detected": true
+    },
+    "chunks": [
+        {
+            "risk_score": 20,
+            "is_vishing": false,
+            "reasoning": "La transcription actuelle ne contient pas suffisamment d'informations pour déterminer une tentative de vishing. Elle commence simplement par un message indiquant que la personne a été contactée par Amazon concernant quelque chose, ce qui pourrait être légitime ou non sans plus de contexte.",
+            "urgency_detected": false
+        },
+        {
+            "risk_score": 50,
+            "is_vishing": false,
+            "reasoning": "La transcription ne montre pas de signes distinctifs d'une tentative de vishing. Bien que l'appelure de compte d'Amazon, le ton et les informations demandées soient peu probants (demande d'autorisation d'un paiement sans plus de détails), il n'y a pas encore d'intimidation directe ni de menace claire.",
+            "urgency_detected": false
+        },
+        {
+            "risk_score": 70,
+            "is_vishing": true,
+            "reasoning": "La conversation mentionne une tentative d'autorisation de paiement sans que l'appelant n'ait été confirmé par Amazon. De plus, il y a un lien suspect avec un produit spécifique (iPhone 11 Pro) qui pourrait indiquer que l'appel est destiné à un individu ou une entreprise ayant effectué récemment une telle transaction.",
+            "urgency_detected": true
+        },
+        {
+            "risk_score": 75,
+            "is_vishing": true,
+            "reasoning": "La conversation contient des éléments caractéristiques d'un vishing, notamment une prétendue origine de l'appel (Amazon), un montant spécifique demandé pour une transaction (299$), et la tentative d'obtenir une autorisation de paiement. L'incitation à appuyer sur un certain numéro si on veut parler ajoute également une touche suspecte.",
+            "urgency_detected": true
+        },
+        {
+            "risk_score": 85,
+            "is_vishing": true,
+            "reasoning": "La conversation présente des caractéristiques de vishing courantes, notamment l'authentification par un numéro inconnu prétendant être Amazon, la mention d'une commande non sollicitée (iPhone 11 Pro), et le demande de confirmation par une action téléphonique (press 2 to authorize).",
+            "urgency_detected": true
+        }
+    ]
+}

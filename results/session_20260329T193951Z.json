@@ -1,0 +1,49 @@
+{
+    "timestamp": "2026-03-29T19:39:51.855191",
+    "full_transcription": " Hello. You have been contacted for now, as long as...  If you do not alter eyes, then press on to speak R.  are to authorize a payment of $299.  To inform that there has been an order place for an apple iPhone 11 pro user.  or press 2 to authorize. Thank you. ",
+    "global_risk_score": 70,
+    "last_analysis": {
+        "risk_score": 70,
+        "is_vishing": true,
+        "reasoning": "La conversation contient plusieurs éléments caractéristiques d'un vishing. Premièrement, le message est très formel et impersonnel, avec des expressions comme 'you have been contacted for now'. Deuxièmement, la menace d'une action si l'usager ne prend pas une mesure spécifiée ('if you do not alter eyes, then press on to speak R') est incohérente. Enfin, le fait de demander à l'utilisateur de valider un paiement pour quelque chose qu'ils n’ont pas commandé ('order place for an apple iPhone 11 pro user') et la présence d'options d'appui (press 2 to authorize) sont des techniques courantes utilisées par les vishers.",
+        "urgency_detected": false
+    },
+    "chunks": [
+        {
+            "risk_score": 15,
+            "is_vishing": false,
+            "reasoning": "La transcription fournie ne contient pas assez d'informations pour déterminer si c'est une tentative de fraude. Le message commence mais ne développe pas la conversation, et n'inclut pas généralement les éléments clés que l'on trouve dans un vishing comme des demandes spécifiques d’action ou de renseignements personnels.",
+            "urgency_detected": false
+        },
+        {
+            "risk_score": 20,
+            "is_vishing": false,
+            "reasoning": "La phrase 'If you do not alter eyes, then press on to speak R' semble absurde et ne correspond pas à la terminologie habituelle des tentatives de vishing. Il n'y a aucune indication claire d'une tentative de fraude dans cette transcription.",
+            "urgency_detected": false
+        },
+        {
+            "risk_score": 70,
+            "is_vishing": true,
+            "reasoning": "La conversation contient des éléments caractéristiques du vishing, notamment une demande d'autorisation de paiement avec un montant spécifique ($299) et l'utilisation de codes de commande complexes (comme 'press on to speak R.') qui sont souvent utilisés par les escrocs pour tromper leurs victimes.",
+            "urgency_detected": false
+        },
+        {
+            "risk_score": 65,
+            "is_vishing": false,
+            "reasoning": "La conversation semble incohérente et incomplète, contenant des parties qui n'ont pas de sens (comme 'If you do not alter eyes, then press on to speak R.'). De plus, elle ne présente aucun élément clair indiquant une tentative de vishing, comme la demande d'informations personnelles confidentielles ou financières directes.",
+            "urgency_detected": false
+        },
+        {
+            "risk_score": 75,
+            "is_vishing": true,
+            "reasoning": "La conversation contient des éléments caractéristiques d'un vishing, notamment le ton urgent, la demande de confirmation par un code ou une action téléphonique (pression du bouton), et l'indication d'une somme d'argent (299$). Il suggère également une transaction inattendue impliquant Apple, ce qui pourrait être utilisé pour tromper les victimes en faisant semblant de provenir d'un service officiel.",
+            "urgency_detected": true
+        },
+        {
+            "risk_score": 70,
+            "is_vishing": true,
+            "reasoning": "La conversation contient plusieurs éléments caractéristiques d'un vishing. Premièrement, le message est très formel et impersonnel, avec des expressions comme 'you have been contacted for now'. Deuxièmement, la menace d'une action si l'usager ne prend pas une mesure spécifiée ('if you do not alter eyes, then press on to speak R') est incohérente. Enfin, le fait de demander à l'utilisateur de valider un paiement pour quelque chose qu'ils n’ont pas commandé ('order place for an apple iPhone 11 pro user') et la présence d'options d'appui (press 2 to authorize) sont des techniques courantes utilisées par les vishers.",
+            "urgency_detected": false
+        }
+    ]
+}

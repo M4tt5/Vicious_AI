@@ -1,0 +1,67 @@
+{
+    "timestamp": "2026-03-29T19:37:26.352661",
+    "full_transcription": " Hello, you need your bank number and also ...  Manufacturing for you? You have to say...  and so I will tell you if I can get this one.   1 2 4 gold    ",
+    "global_risk_score": 30,
+    "last_analysis": {
+        "risk_score": 30,
+        "is_vishing": false,
+        "reasoning": "La conversation semble incomplète et n'inclut pas de demandes directes d'informations bancaires personnelles. Elle contient des éléments non sensibles comme un numéro manufacturé pour une carte (124 gold) ce qui ne représente pas de risque significatif.",
+        "urgency_detected": false
+    },
+    "chunks": [
+        {
+            "risk_score": 20,
+            "is_vishing": false,
+            "reasoning": "La transcription fournie n'est pas suffisamment détaillée pour détecter une tentative de vishing. Elle ne contient aucune information claire sur le ton, la pression, ou l'information demandée qui pourrait suggérer une intention malveillante.",
+            "urgency_detected": false
+        },
+        {
+            "risk_score": 20,
+            "is_vishing": false,
+            "reasoning": "Cette conversation ne contient pas d’éléments clairs indiquant une tentative de vishing. La phrase 'Manufacturing for you?' pourrait être mal comprise ou incohérente dans ce contexte, et il n'y a aucun signal explicite d'une demande frauduleuse.",
+            "urgency_detected": false
+        },
+        {
+            "risk_score": 20,
+            "is_vishing": false,
+            "reasoning": "La transcription semble incohérente et incomplète, n'indiquant pas de menaces claires ou directes. Il y a peu d'indices suggérant une tentative de fraude.",
+            "urgency_detected": false
+        },
+        {
+            "risk_score": 20,
+            "is_vishing": false,
+            "reasoning": "La conversation semble incohérente et ne présente pas de caractéristiques claires d'une tentative de vishing. Les phrases sont incomplètes et il n'y a aucune demande explicite d'informations personnelles ou bancaires.",
+            "urgency_detected": false
+        },
+        {
+            "risk_score": 30,
+            "is_vishing": false,
+            "reasoning": "Cette conversation ne montre aucune tentative claire de fraude ou de vishing. La phrase 'Manufacturing for you?' est mal formulée et incomplète, ce qui pourrait indiquer une mauvaise traduction ou une confusion dans la communication. Il n'y a pas non plus d'urgence exprimée.",
+            "urgency_detected": false
+        },
+        {
+            "risk_score": 30,
+            "is_vishing": false,
+            "reasoning": "La conversation semble confuse et ne contient pas de éléments clés caractéristiques d'un vishing comme des menaces directes ou des demandes précises de renseignements bancaires. Cependant, le contexte n'est pas clair et pourrait contenir des pièges.",
+            "urgency_detected": false
+        },
+        {
+            "risk_score": 30,
+            "is_vishing": false,
+            "reasoning": "La conversation semble incohérente et manque de clarté. Les phrases sont brèves et disjointes, sans contexte clair ou demande précise d'information bancaire. Il n'y a pas de signes distinctifs d'une tentative de vishing.",
+            "urgency_detected": false
+        },
+        {
+            "risk_score": 30,
+            "is_vishing": false,
+            "reasoning": "Cette conversation ne contient pas d'éléments clairs indiquant une tentative de vishing. Elle semble être un échange aléatoire ou mal compris avec des mots non sensés comme 'Manufacturing for you?' et '1 2 4 gold'.",
+            "urgency_detected": false
+        },
+        {
+            "risk_score": 30,
+            "is_vishing": false,
+            "reasoning": "La conversation semble incomplète et n'inclut pas de demandes directes d'informations bancaires personnelles. Elle contient des éléments non sensibles comme un numéro manufacturé pour une carte (124 gold) ce qui ne représente pas de risque significatif.",
+            "urgency_detected": false
+        }
+    ]
+}

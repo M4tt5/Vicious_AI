@@ -1,0 +1,22 @@
+{
+    "timestamp": "2026-03-29T18:55:02.254049",
+    "full_transcription": " Hello. You have been contacted from Amazon this call as it regard to-  Authorize a payment of $299. We would like you to...  Form that there has been an order place for an apple iPhone 11 Pro using your account.  If you do not authorize, then press want to speak or represent.  or press 2 to authorize. Thank you.",
+    "global_risk_score": 0.0,
+    "chunks": [
+        {
+            "error": "analyse échouée"
+        },
+        {
+            "error": "analyse échouée"
+        },
+        {
+            "error": "analyse échouée"
+        },
+        {
+            "error": "analyse échouée"
+        },
+        {
+            "error": "analyse échouée"
+        }
+    ]
+}

@@ -1,0 +1,43 @@
+{
+    "timestamp": "2026-03-29T19:17:02.761022",
+    "full_transcription": " Hello. You have been contacted from Amazon this call as it regard to-  Authorize a payment of $299. We would like you to...  Form that there has been an order place for an apple iPhone 11 Pro using your account.  If you do not authorize, then press want to speak or represent.  or press 2 to authorize. Thank you.",
+    "global_risk_score": 66.0,
+    "last_analysis": {
+        "risk_score": 85,
+        "is_vishing": true,
+        "reasoning": "La conversation ressemble fortement à un vishing car elle imite une communication d'Amazon pour obtenir l'autorisation de paiement. Elle contient des éléments classiques comme la menace d'une non-authorization entraînant un blocage potentiel et le demande explicite de pression de touche.",
+        "urgency_detected": true
+    },
+    "chunks": [
+        {
+            "risk_score": 20,
+            "is_vishing": false,
+            "reasoning": "La conversation commence par un appel provenant d'Amazon, ce qui est normal puisque c'est un service de vente en ligne. Il n'y a pas encore de signes distinctifs de vishing.",
+            "urgency_detected": false
+        },
+        {
+            "risk_score": 65,
+            "is_vishing": true,
+            "reasoning": "La conversation commence par un appel provenant d'Amazon qui mentionne l'autorisation d'un paiement, ce qui est souvent une caractéristique des appels de fraude. Cependant, la phrase n'est pas complétée et il n'y a pas encore de preuve claire que c'est une tentative de vishing.",
+            "urgency_detected": false
+        },
+        {
+            "risk_score": 75,
+            "is_vishing": true,
+            "reasoning": "Le message mentionne une transaction suspecte impliquant Amazon, une demande d'autorisation de paiement et une référence à un produit Apple. Cependant, il n'y a pas encore de preuve claire que l'appel est frauduleux.",
+            "urgency_detected": true
+        },
+        {
+            "risk_score": 85,
+            "is_vishing": true,
+            "reasoning": "La conversation contient des éléments caractéristiques d'une tentative de vishing. Elle mentionne une prétendue transaction sur le compte Amazon, demande l'autorisation d'un paiement et insiste pour que la personne appelle immédiatement pour plus d'informations.",
+            "urgency_detected": true
+        },
+        {
+            "risk_score": 85,
+            "is_vishing": true,
+            "reasoning": "La conversation ressemble fortement à un vishing car elle imite une communication d'Amazon pour obtenir l'autorisation de paiement. Elle contient des éléments classiques comme la menace d'une non-authorization entraînant un blocage potentiel et le demande explicite de pression de touche.",
+            "urgency_detected": true
+        }
+    ]
+}

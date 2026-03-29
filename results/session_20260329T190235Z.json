@@ -1,0 +1,37 @@
+{
+    "timestamp": "2026-03-29T19:02:35.321591",
+    "full_transcription": " Hello. You have been contacted from Amazon this call as it regard to-  Authorize a payment of $299. We would like you to...  Form that there has been an order place for an apple iPhone 11 Pro using your account.  If you do not authorize, then press want to speak or represent.  or press 2 to authorize. Thank you.",
+    "global_risk_score": 70.0,
+    "chunks": [
+        {
+            "risk_score": 75,
+            "is_vishing": true,
+            "reasoning": "La conversation commence par une référence à un appel d'Amazon, ce qui est courant dans les vishings. Cependant, la phrase n'est pas complète et manque de détails spécifiques qui pourraient indiquer avec certitude qu'il s'agit d'un vishing.",
+            "urgency_detected": false
+        },
+        {
+            "risk_score": 85,
+            "is_vishing": true,
+            "reasoning": "La demande d'autorisation d'un paiement monétaire est généralement une indication de vishing, car les escrocs téléphoniques utilisent souvent cette technique pour obtenir des informations financières. Le contexte initial indiquant un contact d'Amazon crée un faux sentiment de légitimité, ce qui rend l'appel plus probablement frauduleux.",
+            "urgency_detected": true
+        },
+        {
+            "risk_score": 30,
+            "is_vishing": false,
+            "reasoning": "La nouvelle transcription ne présente pas de signes évidents d'escroquerie ou de vishing. Elle indique simplement qu'une commande a été effectuée avec le compte de l'utilisateur, ce qui pourrait être une communication normale du service client d'Amazon.",
+            "urgency_detected": false
+        },
+        {
+            "risk_score": 85,
+            "is_vishing": true,
+            "reasoning": "Le message insiste pour obtenir une réponse immédiate de l'utilisateur en demandant de 'presser si vous voulez parler'. C'est un signe typique du vishing. De plus, la mention d'un paiement autorisé indéfiniment suggère une tentative de fraude car Amazon ne ferait pas une telle demande.",
+            "urgency_detected": true
+        },
+        {
+            "risk_score": 75,
+            "is_vishing": true,
+            "reasoning": "L'instruction à appuyer sur '2' pour autoriser la transaction et l'appel à action suggèrent un scénario de vishing. La menace d'une conversation suivie si l'autorisation n'est pas donnée renforce cette suspicion.",
+            "urgency_detected": true
+        }
+    ]
+}
