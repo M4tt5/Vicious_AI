@@ -93,6 +93,9 @@ pip install fastapi uvicorn python-multipart
 # Chargement des variables d'environnement
 pip install python-dotenv
 
+# Gestion des token JWT de connexion
+pip install firebase-admin
+
 # Requêtes HTTP (pour communiquer avec Ollama)
 pip install requests
 
