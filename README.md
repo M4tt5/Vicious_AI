@@ -154,14 +154,14 @@ Cette clé est utilisée pour sécuriser les endpoints du serveur. L'application
 ### 5. Lancer le serveur
 
 ```bash
-python -m uvicorn Serveur.server:app --host 0.0.0.0 --port 8000
+python -m uvicorn Serveur.server:app --host localhost --port 8000
 ```
 
 Le serveur sera accessible sur `http://<IP_de_votre_machine>:8000`.
 
 Pour le développement avec rechargement automatique :
 ```bash
-python -m uvicorn Serveur.server:app --host 0.0.0.0 --port 8000 --reload
+python -m uvicorn Serveur.server:app --host localhost --port 8000 --reload
 ```
 
 
