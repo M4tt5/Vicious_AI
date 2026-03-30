@@ -78,6 +78,76 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="12dp"/>
 
+        <!-- Label tactiques -->
+        <TextView
+            android:id="@+id/tacticsLabel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Tactiques détectées"
+            android:textSize="13sp"
+            android:textColor="#888888"
+            android:textAllCaps="false"
+            app:layout_constraintTop_toBottomOf="@id/scoreProgress"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="20dp"/>
+
+        <!-- Badges des tactiques -->
+        <LinearLayout
+            android:id="@+id/tacticsLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="start"
+            app:layout_constraintTop_toBottomOf="@id/tacticsLabel"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="8dp">
+
+            <TextView
+                android:id="@+id/badgeUrgency"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Urgence"
+                android:textSize="12sp"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="4dp"
+                android:layout_marginEnd="6dp"
+                android:background="@drawable/badge_inactive"/>
+
+            <TextView
+                android:id="@+id/badgeAuthority"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Autorité"
+                android:textSize="12sp"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="4dp"
+                android:layout_marginEnd="6dp"
+                android:background="@drawable/badge_inactive"/>
+
+            <TextView
+                android:id="@+id/badgeSensitive"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Données sensibles"
+                android:textSize="12sp"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="4dp"
+                android:layout_marginEnd="6dp"
+                android:background="@drawable/badge_inactive"/>
+
+            <TextView
+                android:id="@+id/badgeImpersonation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Usurpation"
+                android:textSize="12sp"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="4dp"
+                android:background="@drawable/badge_inactive"/>
+
+        </LinearLayout>
+
         <!-- Segment en cours -->
         <TextView
             android:id="@+id/segmentText"
@@ -86,12 +156,12 @@
             android:text=""
             android:textSize="13sp"
             android:textColor="#888888"
-            app:layout_constraintTop_toBottomOf="@id/scoreProgress"
+            app:layout_constraintTop_toBottomOf="@id/tacticsLayout"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="20dp"/>
 
-        <!-- Transcription -->
+        <!-- Transcription complète -->
         <TextView
             android:id="@+id/transcriptText"
             android:layout_width="0dp"
@@ -106,7 +176,7 @@
             app:layout_constraintTop_toBottomOf="@id/segmentText"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="12dp"/>
+            android:layout_marginTop="8dp"/>
 
         <!-- Raisonnement IA -->
         <TextView

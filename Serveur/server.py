@@ -40,16 +40,40 @@ def detect_vishing(full_transcription: str) -> dict:
     Analyse la transcription COMPLÈTE de la conversation depuis le début.
     Plus de contexte partiel — l'IA voit tout à chaque segment.
     """
-    system_prompt = (
-        "Tu es un expert en cybersécurité spécialisé dans la détection du vishing. "
-        "Analyse la conversation COMPLÈTE ci-dessous et détecte si c'est une tentative de fraude. "
-        "Réponds UNIQUEMENT en JSON avec : "
-        "'risk_score' (0 à 100), 'is_vishing' (true/false), 'reasoning' (explication), 'urgency_detected' (true/false)."
-    )
+    system_prompt = """Tu es un expert en cybersécurité spécialisé dans la détection du vishing (fraude téléphonique).
+
+Tu analyses des transcriptions de conversations téléphoniques en te basant sur 4 tactiques de social engineering reconnues :
+
+1. Urgency — Créer un sentiment d'urgence ou de pression pour pousser la victime à agir rapidement sans réfléchir.
+2. Authority — Utiliser une position d'autorité ou d'expertise (banque, police, Amazon, Microsoft...) pour manipuler la cible.
+3. Sensitive Information — Tenter d'obtenir des informations confidentielles (numéro de carte, mot de passe, code OTP...).
+4. Impersonation — Se faire passer pour quelqu'un d'autre afin d'accéder à des informations confidentielles.
+
+Pour chaque conversation, tu dois :
+- Identifier quelles tactiques sont présentes
+- Évaluer le niveau de risque global
+- Expliquer ton raisonnement de façon claire et concise
+
+Réponds UNIQUEMENT en JSON valide avec exactement ces champs :
+{
+  "risk_score": <entier entre 0 et 100>,
+  "is_vishing": <true ou false>,
+  "reasoning": "<explication concise en français>",
+  "urgency_detected": <true ou false>,
+  "tactics_detected": {
+    "urgency": <true ou false>,
+    "authority": <true ou false>,
+    "sensitive_information": <true ou false>,
+    "impersonation": <true ou false>
+  }
+}"""
 
     prompt = f"""
-Transcription complète de la conversation jusqu'ici :
+Analyse la transcription complète de la conversation téléphonique suivante :
+
 {full_transcription}
+
+Identifie les tactiques de social engineering présentes et évalue le risque de vishing.
 """
 
     try:
@@ -59,12 +83,18 @@ Transcription complète de la conversation jusqu'ici :
                 "model": "qwen2.5:7b",
                 "prompt": f"{system_prompt}\n{prompt}",
                 "stream": False,
-                "format": "json"
+                "format": "json",
+                "options": {
+                    "temperature": 0.1,
+                    "top_p": 0.9
+                }
             },
             timeout=60
         )
         response.raise_for_status()
-        return json.loads(response.json().get("response", "{}"))
+        result = json.loads(response.json().get("response", "{}"))
+        print(f"Analyse : score={result.get('risk_score')} | vishing={result.get('is_vishing')} | tactiques={result.get('tactics_detected')}")
+        return result
 
     except Exception as e:
         print(f"Erreur Ollama : {e}")

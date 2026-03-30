@@ -38,7 +38,7 @@ class DecisionActivity : AppCompatActivity() {
         private const val BIT_RATE         = 128_000
 
         // 🔧 Remplace par ton IP locale, ex: "http://192.168.1.42:8000"
-        private const val SERVER_URL = "http://192.168.2.49:8000"
+        private const val SERVER_URL = "http://192.168.X.X:8000"
     }
 
     // ── État ──────────────────────────────────────────────────────────────────
@@ -67,15 +67,21 @@ class DecisionActivity : AppCompatActivity() {
     }
 
     // ── Vues ──────────────────────────────────────────────────────────────────
-    private lateinit var statusText:    TextView
-    private lateinit var segmentText:   TextView
-    private lateinit var scoreText:     TextView
-    private lateinit var transcriptText:TextView
-    private lateinit var reasoningText: TextView
-    private lateinit var scoreProgress: ProgressBar
-    private lateinit var uploadSpinner: ProgressBar
-    private lateinit var startButton:   MaterialButton
-    private lateinit var stopButton:    MaterialButton
+    private lateinit var statusText:       TextView
+    private lateinit var segmentText:      TextView
+    private lateinit var scoreText:        TextView
+    private lateinit var transcriptText:   TextView
+    private lateinit var reasoningText:    TextView
+    private lateinit var scoreProgress:    ProgressBar
+    private lateinit var uploadSpinner:    ProgressBar
+    private lateinit var startButton:      MaterialButton
+    private lateinit var stopButton:       MaterialButton
+
+    // ── Badges tactiques ──────────────────────────────────────────────────────
+    private lateinit var badgeUrgency:       TextView
+    private lateinit var badgeAuthority:     TextView
+    private lateinit var badgeSensitive:     TextView
+    private lateinit var badgeImpersonation: TextView
 
     // ── Lifecycle ─────────────────────────────────────────────────────────────
 
@@ -83,15 +89,19 @@ class DecisionActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_decision)
 
-        statusText     = findViewById(R.id.statusText)
-        segmentText    = findViewById(R.id.segmentText)
-        scoreText      = findViewById(R.id.scoreText)
-        transcriptText = findViewById(R.id.transcriptText)
-        reasoningText  = findViewById(R.id.reasoningText)
-        scoreProgress  = findViewById(R.id.scoreProgress)
-        uploadSpinner  = findViewById(R.id.uploadSpinner)
-        startButton    = findViewById(R.id.startRecordingButton)
-        stopButton     = findViewById(R.id.stopRecordingButton)
+        statusText       = findViewById(R.id.statusText)
+        segmentText      = findViewById(R.id.segmentText)
+        scoreText        = findViewById(R.id.scoreText)
+        transcriptText   = findViewById(R.id.transcriptText)
+        reasoningText    = findViewById(R.id.reasoningText)
+        scoreProgress    = findViewById(R.id.scoreProgress)
+        uploadSpinner    = findViewById(R.id.uploadSpinner)
+        startButton      = findViewById(R.id.startRecordingButton)
+        stopButton       = findViewById(R.id.stopRecordingButton)
+        badgeUrgency     = findViewById(R.id.badgeUrgency)
+        badgeAuthority   = findViewById(R.id.badgeAuthority)
+        badgeSensitive   = findViewById(R.id.badgeSensitive)
+        badgeImpersonation = findViewById(R.id.badgeImpersonation)
 
         stopButton.isEnabled     = false
         uploadSpinner.visibility = View.GONE
@@ -100,6 +110,12 @@ class DecisionActivity : AppCompatActivity() {
         stopButton.setOnClickListener  { stopRecordingLoop()  }
 
         Log.i(TAG, "Session ID : $sessionId")
+
+        //----- Pour obtenir un token de session pour les test serveur ------
+        //FirebaseAuth.getInstance().currentUser?.getIdToken(false)
+        //    ?.addOnSuccessListener { result ->
+        //        Log.d("TOKEN_TEST", "idToken : ${result.token}")
+        //    }
     }
 
     override fun onDestroy() {
@@ -131,6 +147,7 @@ class DecisionActivity : AppCompatActivity() {
         statusText.text       = "Enregistrement en cours…"
         transcriptText.text   = ""
         reasoningText.text    = ""
+        resetBadges()
 
         Log.i(TAG, "═══ Démarrage session $sessionId ═══")
 
@@ -149,7 +166,6 @@ class DecisionActivity : AppCompatActivity() {
         statusText.text       = "Finalisation…"
         segmentText.text      = ""
 
-        // Envoie le dernier segment avant de clore la session
         if (lastFile != null) {
             uploadSegment(lastFile, onComplete = { endSession() })
         } else {
@@ -190,10 +206,6 @@ class DecisionActivity : AppCompatActivity() {
 
     // ── Envoi d'un segment au serveur ─────────────────────────────────────────
 
-    /**
-     * @param onComplete callback appelé une fois l'upload terminé (succès ou échec).
-     *                   Utilisé pour enchaîner endSession() après le dernier segment.
-     */
     private fun uploadSegment(file: File, onComplete: (() -> Unit)?) {
         val segNum = segmentIndex
 
@@ -229,9 +241,7 @@ class DecisionActivity : AppCompatActivity() {
                     Log.d(TAG, "Segment #$segNum réponse [${response.code}] : $body")
 
                     if (response.isSuccessful) {
-                        val json = JSONObject(body)
-
-                        // Nouveau champ : transcription complète depuis le début
+                        val json               = JSONObject(body)
                         val fullTranscription  = json.optString("full_transcription", "")
                         val chunkTranscription = json.optString("chunk_transcription", "")
                         val analysis           = json.optJSONObject("chunk_analysis")
@@ -291,9 +301,9 @@ class DecisionActivity : AppCompatActivity() {
                         val fullText     = json.optString("full_transcription", "")
                         val lastAnalysis = json.optJSONObject("last_analysis")
                         val reasoning    = lastAnalysis?.optString("reasoning", "") ?: ""
-                        val isVishing    = lastAnalysis?.optBoolean("is_vishing", false) ?: false
+                        val tactics      = lastAnalysis?.optJSONObject("tactics_detected")
 
-                        Log.i(TAG, "Score final : $globalScore — vishing : $isVishing")
+                        Log.i(TAG, "Score final : $globalScore")
 
                         withContext(Dispatchers.Main) {
                             statusText.text       = "Analyse terminée"
@@ -302,6 +312,7 @@ class DecisionActivity : AppCompatActivity() {
                                 score      = globalScore,
                                 transcript = fullText,
                                 reasoning  = reasoning,
+                                tactics    = tactics,
                                 isFinal    = true
                             )
                         }
@@ -333,35 +344,34 @@ class DecisionActivity : AppCompatActivity() {
     ) {
         if (analysis == null) return
 
-        val score     = analysis.optInt("risk_score", -1)
+        val score    = analysis.optInt("risk_score", -1)
         val reasoning = analysis.optString("reasoning", "")
+        val tactics  = analysis.optJSONObject("tactics_detected")
 
         Log.i(TAG, "Segment #$segNum — score: $score | chunk: \"$chunkTranscription\"")
 
         CoroutineScope(Dispatchers.Main).launch {
             segmentText.text = "Segment #$segNum analysé"
-            // Affiche la transcription complète pour que l'utilisateur suive la conversation
             updateScoreUI(
                 score      = score,
                 transcript = fullTranscription,
                 reasoning  = reasoning,
+                tactics    = tactics,
                 isFinal    = false
             )
         }
     }
 
-    /**
-     * Met à jour score, barre de progression, transcription et raisonnement.
-     * @param isFinal  true = résultat de end-session (affichage légèrement différent)
-     */
     private fun updateScoreUI(
         score: Int,
         transcript: String,
         reasoning: String,
+        tactics: JSONObject?,
         isFinal: Boolean
     ) {
         if (score < 0) return
 
+        // Score et barre
         scoreProgress.progress = score
         scoreText.text = if (isFinal) "Score final : $score%" else "Score de risque : $score%"
 
@@ -372,8 +382,38 @@ class DecisionActivity : AppCompatActivity() {
         }
         scoreText.setTextColor(color)
 
+        // Transcription et raisonnement
         if (transcript.isNotBlank()) transcriptText.text = transcript
         if (reasoning.isNotBlank())  reasoningText.text  = reasoning
+
+        // Badges tactiques
+        tactics?.let { updateTacticsBadges(it) }
+    }
+
+    // ── Gestion des badges ────────────────────────────────────────────────────
+
+    private fun updateTacticsBadges(tactics: JSONObject) {
+        setBadge(badgeUrgency,       tactics.optBoolean("urgency",              false))
+        setBadge(badgeAuthority,     tactics.optBoolean("authority",            false))
+        setBadge(badgeSensitive,     tactics.optBoolean("sensitive_information",false))
+        setBadge(badgeImpersonation, tactics.optBoolean("impersonation",        false))
+    }
+
+    private fun setBadge(badge: TextView, active: Boolean) {
+        if (active) {
+            badge.setBackgroundResource(R.drawable.badge_active)
+            badge.setTextColor(getColor(android.R.color.holo_red_light))
+        } else {
+            badge.setBackgroundResource(R.drawable.badge_inactive)
+            badge.setTextColor(0xFF888888.toInt())
+        }
+    }
+
+    private fun resetBadges() {
+        listOf(badgeUrgency, badgeAuthority, badgeSensitive, badgeImpersonation).forEach {
+            it.setBackgroundResource(R.drawable.badge_inactive)
+            it.setTextColor(0xFF888888.toInt())
+        }
     }
 
     // ── Helpers ───────────────────────────────────────────────────────────────
