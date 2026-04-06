@@ -90,14 +90,17 @@ Si le fichier `requirements.txt` n'est pas présent, installer manuellement :
 # Serveur web
 pip install fastapi uvicorn python-multipart
 
-# Chargement des variables d'environnement
-pip install python-dotenv
+# Gestion des token JWT de connexion
+pip install firebase-admin
 
 # Requêtes HTTP (pour communiquer avec Ollama)
 pip install requests
 
 # Transcription audio (Speech-to-Text)
 pip install openai-whisper
+
+# Encodage sémantique des transcriptions
+pip install sentence-transformers
 
 # PyTorch (requis par Whisper) — choisir la version adaptée à votre machine :
 
@@ -139,19 +142,7 @@ Ollama tourne sur `http://localhost:11434` par défaut, ce qui correspond à la 
 
 ---
 
-### 4. Configurer les variables d'environnement
-
-Créer un fichier `.env` à la racine du projet :
-
-```env
-API_KEY=votre_clé_secrète_ici
-```
-
-Cette clé est utilisée pour sécuriser les endpoints du serveur. L'application Android doit envoyer cette même clé dans le header `x-api-key` de chaque requête.
-
----
-
-### 5. Lancer le serveur
+### 4. Lancer le serveur
 
 ```bash
 python -m uvicorn Serveur.server:app --host 0.0.0.0 --port 8000
@@ -183,17 +174,24 @@ Reçoit un chunk audio toutes les ~5 secondes, le transcrit et l'analyse.
 |---|---|---|
 | `file` | fichier audio | Chunk audio (`.wav`, `.m4a`, etc.) |
 | `session_id` | string | Identifiant unique de la session d'appel |
-| `x-api-key` | header | Clé d'authentification |
+| `Authorization` | header | Token Firebase au format Bearer <idToken> |
 
 **Réponse :**
 ```json
 {
   "chunk_transcription": "Bonjour, je vous appelle de votre banque...",
+  "full_transcription": "Transcription complète depuis le début de la session...",
   "chunk_analysis": {
     "risk_score": 85,
     "is_vishing": true,
-    "reasoning": "Demande urgente d'informations bancaires",
-    "urgency_detected": true
+    "reasoning": "Demande urgente d'informations bancaires avec usurpation d'identité",
+    "urgency_detected": true,
+    "tactics_detected": {
+      "urgency": true,
+      "authority": true,
+      "sensitive_information": true,
+      "impersonation": false
+    }
   }
 }
 ```
@@ -201,24 +199,37 @@ Reçoit un chunk audio toutes les ~5 secondes, le transcrit et l'analyse.
 ---
 
 ### `POST /end-session`
-Clôture une session et retourne le bilan complet de l'analyse.
+Clôture une session et retourne le bilan complet de l'analyse. 
+Toutes les données associées à la session sont supprimées du serveur immédiatement après l'envoi de la réponse
 
 | Paramètre | Type | Description |
 |---|---|---|
 | `session_id` | string | Identifiant de la session à clôturer |
-| `x-api-key` | header | Clé d'authentification |
+| `Authorization` | header | Token Firebase au format Bearer <idToken> |
 
 **Réponse :**
 ```json
 {
   "timestamp": "2025-01-01T12:00:00",
-  "full_transcription": "Transcription complète...",
-  "global_risk_score": 72.5,
+  "full_transcription": "Transcription complète de la session...",
+  "global_risk_score": 85,
+  "last_analysis": {
+    "risk_score": 85,
+    "is_vishing": true,
+    "reasoning": "Analyse finale basée sur l'intégralité de la conversation",
+    "urgency_detected": true,
+    "tactics_detected": {
+      "urgency": true,
+      "authority": true,
+      "sensitive_information": true,
+      "impersonation": false
+    }
+  },
   "chunks": [...]
 }
 ```
 
-Les résultats sont également sauvegardés automatiquement dans le dossier `results/` au format JSON.
+Le global_risk_score correspond au score du dernier segment analysé, considéré comme le plus fiable car il a pris en compte l'intégralité de la transcription. Les données ne sont plus sauvegardées sur le serveur après envoi de la réponse, conformément aux engagements de confidentialité de l'application.
 
 
 ## Auteurs
