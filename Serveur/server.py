@@ -46,7 +46,10 @@ def detect_vishing(full_transcription: str) -> dict:
     try:
         recent_text = " ".join(full_transcription.split()[-200:])
         rag_context = retrieve_relevant_context(recent_text)
-        rag_text = "\n".join(rag_context)
+        rag_text = "\n".join([
+            f"- ({round(item['score'],2)}) [{item['label']}/{item['risk']}] {item['text']}"
+            for item in rag_context
+        ])
     except Exception:
         rag_text = ""
 
@@ -93,7 +96,7 @@ Identifie les tactiques de social engineering présentes et évalue le risque de
         response = requests.post(
             OLLAMA_URL,
             json={ 
-                "model": "qwen2.5:7b",
+                "model": "qwen2.5:3b",
                 "prompt": f"{system_prompt}\n{prompt}",
                 "stream": False,
                 "format": "json",

@@ -123,5 +123,177 @@
     "text": "Nous avons besoin d'une action immédiate sinon votre compte sera définitivement bloqué.",
     "label": "urgence",
     "risk": "high"
+  },
+  {
+    "text": "Bonjour, votre colis sera livré demain entre 9h et 12h.",
+    "label": "normal",
+    "risk": "low"
+  },
+  {
+    "text": "Votre rendez-vous chez le médecin est confirmé pour mardi.",
+    "label": "normal",
+    "risk": "low"
+  },
+  {
+    "text": "Nous vous informons que votre facture est disponible dans votre espace client.",
+    "label": "normal",
+    "risk": "low"
+  },
+  {
+    "text": "Votre abonnement a été renouvelé avec succès.",
+    "label": "normal",
+    "risk": "low"
+  },
+  {
+    "text": "Bonjour, nous vous contactons pour confirmer votre rendez-vous prévu aujourd’hui.",
+    "label": "normal",
+    "risk": "low"
+  },
+  {
+    "text": "Votre colis est en cours de livraison, vous pouvez suivre son statut en ligne.",
+    "label": "normal",
+    "risk": "low"
+  },
+  {
+    "text": "Merci pour votre paiement, votre transaction a bien été enregistrée.",
+    "label": "normal",
+    "risk": "low"
+  },
+  {
+    "text": "Votre compte a été mis à jour avec succès.",
+    "label": "normal",
+    "risk": "low"
+  },
+  {
+    "text": "Bonjour, nous vous appelons pour vous informer d’une maintenance prévue ce soir.",
+    "label": "normal",
+    "risk": "low"
+  },
+  {
+    "text": "Votre commande a été expédiée et arrivera dans quelques jours.",
+    "label": "normal",
+    "risk": "low"
+  },
+  {
+    "text": "Nous vous confirmons que votre demande a été prise en compte.",
+    "label": "normal",
+    "risk": "low"
+  },
+  {
+    "text": "Votre rendez-vous a été annulé, merci de nous contacter pour le reprogrammer.",
+    "label": "normal",
+    "risk": "low"
+  },
+  {
+    "text": "Bonjour, votre facture a été réglée, merci pour votre paiement.",
+    "label": "normal",
+    "risk": "low"
+  },
+  {
+    "text": "Nous vous informons que votre service reste actif sans interruption.",
+    "label": "normal",
+    "risk": "low"
+  },
+  {
+    "text": "Votre demande de support a été traitée avec succès.",
+    "label": "normal",
+    "risk": "low"
+  },
+  {
+    "text": "Bonjour, nous vous rappelons votre rendez-vous prévu demain.",
+    "label": "normal",
+    "risk": "low"
+  },
+  {
+    "text": "Votre dossier est en cours de traitement, nous vous tiendrons informé.",
+    "label": "normal",
+    "risk": "low"
+  },
+  {
+    "text": "Merci de votre appel, nous restons disponibles pour toute question.",
+    "label": "normal",
+    "risk": "low"
+  },
+  {
+    "text": "Votre réservation a été confirmée avec succès.",
+    "label": "normal",
+    "risk": "low"
+  },
+  {
+    "text": "Bonjour, nous vous contactons pour une enquête de satisfaction.",
+    "label": "normal",
+    "risk": "low"
+  },
+  {
+  "text": "Nous avons besoin de confirmer certaines informations sur votre compte.",
+  "label": "ambiguous",
+  "risk": "medium"
+  },
+
+
+  {
+    "text": "Bonjour madame, je vous appelle du service fraude de votre banque. Nous avons détecté une tentative de paiement de 1200€ à l'étranger. Pouvez-vous me confirmer que vous êtes bien à l'origine de cette transaction ?",
+    "label": "banque",
+    "risk": "high"
+  },
+  {
+    "text": "Oui bonjour, ici Amazon sécurité. Votre compte a été compromis cette nuit. Je vais devoir vérifier votre identité, vous allez recevoir un code SMS, pouvez-vous me le donner ?",
+    "label": "compte_en_ligne",
+    "risk": "high"
+  },
+  {
+    "text": "Bonjour, je suis technicien Microsoft. Votre ordinateur envoie des signaux d’attaque, il est infecté. Vous devez installer un logiciel immédiatement sinon vos données seront perdues.",
+    "label": "tech_support",
+    "risk": "high"
+  },
+  {
+    "text": "Monsieur, je vous appelle des impôts. Vous avez un retard de paiement, une procédure judiciaire va être lancée dans l’heure si vous ne régularisez pas immédiatement.",
+    "label": "administration",
+    "risk": "high"
+  },
+  {
+    "text": "Allô ? Je suis un ami de votre fils, il a eu un accident, il est à l’hôpital. On a besoin d’argent rapidement pour les soins.",
+    "label": "urgence_famille",
+    "risk": "high"
+  },
+  {
+    "text": "Bonjour, votre carte bancaire va être bloquée dans quelques minutes pour suspicion de fraude. Pour éviter cela, j’ai besoin de votre numéro de carte et du code reçu par SMS.",
+    "label": "banque",
+    "risk": "high"
+  },
+  {
+    "text": "Bonjour, je vous appelle concernant votre compte, nous devons vérifier certaines informations pour des raisons de sécurité.",
+    "label": "ambiguous",
+    "risk": "medium"
+  },
+  {
+    "text": "Votre service pourrait être suspendu prochainement, merci de nous rappeler rapidement.",
+    "label": "pression",
+    "risk": "medium"
+  },
+  {
+    "text": "Nous avons détecté une activité inhabituelle, merci de confirmer vos informations.",
+    "label": "ambiguous",
+    "risk": "medium"
+  },
+  {
+    "text": "Bonjour, je vous appelle pour confirmer votre rendez-vous demain à 14h.",
+    "label": "normal",
+    "risk": "low"
+  },
+  {
+    "text": "Votre colis est en cours de livraison, il arrivera dans la journée.",
+    "label": "normal",
+    "risk": "low"
+  },
+  {
+    "text": "Bonjour, nous faisons une enquête de satisfaction suite à votre dernier achat.",
+    "label": "normal",
+    "risk": "low"
+  },
+  {
+    "text": "Votre facture a bien été réglée, merci pour votre paiement.",
+    "label": "normal",
+    "risk": "low"
   }
 ]

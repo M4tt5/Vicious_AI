@@ -12,6 +12,19 @@ embeddings = model.encode(texts)
 
 def retrieve_relevant_context(query: str, top_k: int = 3):
     query_embedding = model.encode([query])[0]
+
     scores = np.dot(embeddings, query_embedding)
+
     top_indices = np.argsort(scores)[-top_k:]
-    return [texts[i] for i in reversed(top_indices)]
+
+    results = []
+    for i in reversed(top_indices):
+        item = knowledge[i]
+        results.append({
+            "text": item["text"],
+            "label": item["label"],
+            "risk": item["risk"],
+            "score": float(scores[i])
+        })
+
+    return results
