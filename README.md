@@ -142,13 +142,24 @@ Ollama tourne sur `http://localhost:11434` par défaut, ce qui correspond à la 
 
 ---
 
-### 4. Lancer le serveur
+### 4. Téléchargé une clé Firebase pour le token JWT
+
+Aller sur le site firebase.google.com puis dans Go to console
+Créer ensuite un projet puis dans Paramètres et Comptes de service, cliquer sur Générer une nouvelle clé privée
+Metter le fichier json téléchargé à la racine du projet
+
+Puis changer dans la ligne dans serveur.py le nom du fichier avec le votre
+```bash
+cred = credentials.Certificate("viciousai-firebase-adminsdk-fbsvc-xxxx.json")
+```
+
+### 5. Lancer le serveur
 
 ```bash
 python -m uvicorn Serveur.server:app --host 0.0.0.0 --port 8000
 ```
 
-Le serveur sera accessible sur `http://<IP_de_votre_machine>:8000`.
+Le serveur sera accessible sur `http://0.0.0.0:8000/docs`.
 
 Pour le développement avec rechargement automatique :
 ```bash
