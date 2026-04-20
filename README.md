@@ -118,7 +118,7 @@ pip install torch --index-url https://download.pytorch.org/whl/cu121
 
 ### 3. Installer et configurer Ollama
 
-Ollama permet de faire tourner le modèle **Qwen2.5:7b** en local pour la détection de vishing.
+Ollama permet de faire tourner le modèle **Qwen2.5:3b** en local pour la détection de vishing.
 
 **Installation :**
 ```bash
@@ -130,7 +130,7 @@ curl -fsSL https://ollama.com/install.sh | sh
 
 **Télécharger le modèle utilisé par le serveur :**
 ```bash
-ollama pull qwen2.5:7b
+ollama pull qwen2.5:3b
 ```
 
 **Démarrer Ollama (si pas lancé automatiquement) :**
