@@ -171,7 +171,7 @@ python -m uvicorn Serveur.server:app --host 0.0.0.0 --port 8000 --reload
 
 1. Cloner le dépôt et ouvrir le projet dans **Android Studio**
 2. Synchroniser les dépendances Gradle
-3. Configurer l'URL du serveur dans le code Kotlin (pointer vers l'IP du serveur)
+3. Configurer l'URL du serveur dans le code Kotlin dans le fichier DecisionActivity.kt ligne 41 (pointer vers l'IP du serveur)
 4. Exécuter sur un appareil physique Android (recommandé pour l'accès au microphone et au téléphone)
 
 
