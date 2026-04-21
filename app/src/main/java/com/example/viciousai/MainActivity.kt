@@ -67,7 +67,7 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        // ⚠️ Ne PAS enregistrer le listener ici — READ_PHONE_STATE peut ne pas
+        // Ne PAS enregistrer le listener ici — READ_PHONE_STATE peut ne pas
         // être encore accordée. On le fait uniquement si la permission est déjà
         // présente (relancement de l'app après un premier accord).
         if (hasPermission(android.Manifest.permission.READ_PHONE_STATE)) {

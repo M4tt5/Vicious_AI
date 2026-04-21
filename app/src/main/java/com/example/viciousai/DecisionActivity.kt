@@ -37,7 +37,7 @@ class DecisionActivity : AppCompatActivity() {
         private const val SAMPLE_RATE      = 44_100
         private const val BIT_RATE         = 128_000
 
-        // 🔧 Remplacer par l'IP locale
+        // Remplacer par l'IP locale
         private const val SERVER_URL = "http://192.168.2.49:8000"
     }
 

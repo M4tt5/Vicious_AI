@@ -42,7 +42,7 @@ def detect_vishing(full_transcription: str) -> dict:
     Plus de contexte partiel — l'IA voit tout à chaque segment.
     """
 
-    # 🔎 RAG : récupérer contexte pertinent
+    # RAG : récupérer contexte pertinent
     try:
         recent_text = " ".join(full_transcription.split()[-200:])
         rag_context = retrieve_relevant_context(recent_text)
