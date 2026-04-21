@@ -118,7 +118,7 @@ pip install torch --index-url https://download.pytorch.org/whl/cu121
 
 ### 3. Installer et configurer Ollama
 
-Ollama permet de faire tourner le modèle **Qwen2.5:7b** en local pour la détection de vishing.
+Ollama permet de faire tourner le modèle **Qwen2.5:3b** en local pour la détection de vishing.
 
 **Installation :**
 ```bash
@@ -130,7 +130,7 @@ curl -fsSL https://ollama.com/install.sh | sh
 
 **Télécharger le modèle utilisé par le serveur :**
 ```bash
-ollama pull qwen2.5:7b
+ollama pull qwen2.5:3b
 ```
 
 **Démarrer Ollama (si pas lancé automatiquement) :**
@@ -142,13 +142,24 @@ Ollama tourne sur `http://localhost:11434` par défaut, ce qui correspond à la 
 
 ---
 
-### 4. Lancer le serveur
+### 4. Téléchargé une clé Firebase pour le token JWT
+
+Aller sur le site firebase.google.com puis dans Go to console
+Créer ensuite un projet puis dans Paramètres et Comptes de service, cliquer sur Générer une nouvelle clé privée
+Metter le fichier json téléchargé à la racine du projet
+
+Puis changer dans la ligne dans serveur.py le nom du fichier avec le votre
+```bash
+cred = credentials.Certificate("viciousai-firebase-adminsdk-fbsvc-xxxx.json")
+```
+
+### 5. Lancer le serveur
 
 ```bash
 python -m uvicorn Serveur.server:app --host 0.0.0.0 --port 8000
 ```
 
-Le serveur sera accessible sur `http://<IP_de_votre_machine>:8000`.
+Le serveur sera accessible sur `http://0.0.0.0:8000/docs`.
 
 Pour le développement avec rechargement automatique :
 ```bash
@@ -160,7 +171,7 @@ python -m uvicorn Serveur.server:app --host 0.0.0.0 --port 8000 --reload
 
 1. Cloner le dépôt et ouvrir le projet dans **Android Studio**
 2. Synchroniser les dépendances Gradle
-3. Configurer l'URL du serveur dans le code Kotlin (pointer vers l'IP du serveur)
+3. Configurer l'URL du serveur dans le code Kotlin dans le fichier DecisionActivity.kt ligne 41 (pointer vers l'IP du serveur)
 4. Exécuter sur un appareil physique Android (recommandé pour l'accès au microphone et au téléphone)
 
 
